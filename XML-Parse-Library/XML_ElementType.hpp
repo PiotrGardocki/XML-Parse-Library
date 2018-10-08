@@ -1,0 +1,12 @@
+#ifndef XML_ELEMENTTYPE_HPP_
+#define XML_ELEMENTTYPE_HPP_
+
+enum XML_ElementType
+{
+	TAG,
+	COMMENT,
+	CDATA,
+	VALUE
+};
+
+#endif // !XML_ELEMENTTYPE_HPP_
