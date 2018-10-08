@@ -12,7 +12,14 @@ class XML_Tag : public XML_BaseElement
 public:
 	XML_Tag() = default;
 	XML_Tag(const std::string & tagName);
+
 	XML_Tag(const XML_Tag & tag);
+	XML_Tag(XML_Tag && tag) = default;
+
+	XML_Tag & operator=(const XML_Tag & tag);
+	XML_Tag & operator=(XML_Tag && tag) = default;
+
+	~XML_Tag() = default;
 
 	virtual XML_ElementType getElementType() const override;
 

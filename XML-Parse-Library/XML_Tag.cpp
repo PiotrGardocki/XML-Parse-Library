@@ -20,6 +20,24 @@ XML_Tag::XML_Tag(const XML_Tag & tag)
 	}
 }
 
+XML_Tag & XML_Tag::operator=(const XML_Tag & tag)
+{
+	mTagName = tag.mTagName;
+	mAttributes = tag.mAttributes;
+
+	mChildren.resize(0);
+
+	auto childrenCount = tag.getChildrenCount();
+	mChildren.resize(childrenCount);
+
+	for (auto iter = 0; iter < childrenCount; ++iter)
+	{
+		mChildren.at(iter) = std::move(tag.mChildren.at(iter)->makeCopy());
+	}
+
+	return *this;
+}
+
 XML_ElementType XML_Tag::getElementType() const
 {
 	return XML_ElementType::TAG;
