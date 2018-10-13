@@ -1,0 +1,14 @@
+<?xml version="1.1" ?>
+<html>
+	<head id="23">
+		<title/>
+		<link href="style.css" rel="stylesheet"/>
+	</head>
+	<body class="typical" id="1">
+		text
+		<![CDATA[ Content not to be parsed ]]>
+		<div>
+			<!-- just a comment -->
+		</div>
+	</body>
+</html>

@@ -35,9 +35,7 @@ std::string XML_Value::getElementWithValueInOneLine() const
 
 std::list<std::string> XML_Value::getElementWithValueInLines() const
 {
-	std::list<std::string> line;
-	line.push_back(mValue);
-	return line;
+	return getValueInLines();
 }
 
 std::string XML_Value::getClassName() const
