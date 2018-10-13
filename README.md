@@ -4,7 +4,7 @@ For now, library supports only creating XML files.
 
 ## Supported features
 ### Classes
-- XMl_Tag
+- XML_Tag
   - adding children elements
   - handling tag's attributes
   - setting tag's name
