@@ -5,9 +5,9 @@ For now, library supports only creating XML files.
 ## Supported features
 ### Classes
 - XML_Tag
-  - adding children elements
+  - adding/getting children elements
   - handling tag's attributes
-  - setting tag's name
+  - handling tag's name
 - XML_Comment
 - XML_CDATA
 - XML_Value (normal text)
@@ -15,6 +15,6 @@ For now, library supports only creating XML files.
 
 ## Planned features
 - Add handling XML tag's children (removing, getting, other operations)
-- Add character restriction in XML_Comment, XML_CDATA and XML_Value
 - Create documentation for library
 - Add XML_Parser class for reading XML files and parsing them
+- Add namespace for whole library and change classes' names
