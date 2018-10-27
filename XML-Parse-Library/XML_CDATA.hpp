@@ -8,7 +8,7 @@ class XML_CDATA : public XML_BaseElement
 {
 public:
 	XML_CDATA() = default;
-	XML_CDATA(const std::string & value);
+	explicit XML_CDATA(const std::string & value);
 
 	virtual XML_ElementType getElementType() const override;
 

@@ -1,8 +1,9 @@
 #include "XML_Value.hpp"
+#include "Utilities.hpp"
 
 XML_Value::XML_Value(const std::string & value)
-	: mValue(value)
 {
+	setValue(value);
 }
 
 XML_ElementType XML_Value::getElementType() const
@@ -12,8 +13,7 @@ XML_ElementType XML_Value::getElementType() const
 
 void XML_Value::setValue(const std::string & value)
 {
-	// TO DO: add parser checking
-	mValue = value;
+	mValue = correctString(value);
 }
 
 std::string XML_Value::getValueInOneLine() const

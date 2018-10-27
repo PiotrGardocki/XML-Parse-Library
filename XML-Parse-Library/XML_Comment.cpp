@@ -1,8 +1,9 @@
 #include "XML_Comment.hpp"
+#include "XML_Exception.hpp"
 
 XML_Comment::XML_Comment(const std::string & value)
-	: mValue(value)
 {
+	setValue(value);
 }
 
 XML_ElementType XML_Comment::getElementType() const
@@ -12,7 +13,10 @@ XML_ElementType XML_Comment::getElementType() const
 
 void XML_Comment::setValue(const std::string & value)
 {
-	// TO DO: add parser checking
+	auto pos = value.find("-->");
+	if (pos != std::string::npos)
+		throw XML_Exception("XML_Comment can't contain substring '-->'");
+
 	mValue = value;
 }
 

@@ -8,7 +8,7 @@ class XML_Value : public XML_BaseElement
 {
 public:
 	XML_Value() = default;
-	XML_Value(const std::string & value);
+	explicit XML_Value(const std::string & value);
 
 	virtual XML_ElementType getElementType() const override;
 

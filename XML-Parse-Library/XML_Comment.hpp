@@ -8,7 +8,7 @@ class XML_Comment : public XML_BaseElement
 {
 public:
 	XML_Comment() = default;
-	XML_Comment(const std::string & value);
+	explicit XML_Comment(const std::string & value);
 
 	virtual XML_ElementType getElementType() const override;
 

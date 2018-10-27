@@ -25,6 +25,8 @@ public:
 	//bool removeChild(const XML_Tag * const elementPtr);
 
 	virtual unsigned getChildrenCount() const;
+	virtual XML_BaseElement & getChildByPosition(unsigned position);
+	virtual const XML_BaseElement & getChildByPosition(unsigned position) const;
 
 	virtual void setAttribute(const std::string & attributeName, const std::string & value);
 	virtual bool deleteAttribute(const std::string & attributeName);
@@ -43,8 +45,8 @@ public:
 	virtual std::string getElementWithValueInOneLine() const = 0;
 	virtual std::list<std::string> getElementWithValueInLines() const = 0;
 
-	XML_Tag * getParent();
-	const XML_Tag * getParent() const;
+	XML_Tag & getParent();
+	const XML_Tag & getParent() const;
 	bool hasParent() const;
 
 protected:

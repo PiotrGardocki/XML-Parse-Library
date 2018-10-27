@@ -1,14 +1,43 @@
 #include <iostream>
 #include <exception>
 #include <utility>
+#include <memory>
 #include "XML-Parse-Library.hpp"
 
 int main()
-{
+{	
 	using std::cout;
 	using std::cin;
+	using std::endl;
+	
+	/*std::unique_ptr<XML_Tag> pointer(new XML_Tag{});
+	XML_Tag tag;
+	
+	const XML_Tag * ptr = pointer.get();
 
-	XML_Document document;
+	cout << ptr->hasParent() << endl;
+
+	tag.appendChild(std::move(pointer));
+
+	cout << ptr->hasParent() << endl;
+
+	auto & x = ptr->getParent();
+
+	cout << &x << endl;
+
+	cout << &tag << endl;*/
+
+	/*std::string str("<&div>");
+
+	replaceOccurencies(str, "&", "&amp;");
+	replaceOccurencies(str, "<", "&lt;");
+	replaceOccurencies(str, ">", "&gt;");
+	replaceOccurencies(str, "\"", "&quot;");
+	replaceOccurencies(str, "'", "&apos;");
+
+	cout << str << endl;*/
+
+	/*XML_Document document;
 	
 	XML_Tag tag1("head");
 	tag1.appendChild(XML_Tag("title"));
@@ -40,10 +69,10 @@ int main()
 	document.getRootElement().appendChild(std::move(tag2));
 	document.getRootElement().setTagName("html");
 
-	document.saveToFile("test.xml");
+	document.saveToFile("test.xml");*/
 
 	//cout << tag1.getTagName() << "\n" << tag1.getChildrenCount();
-	//cin.get();
+	cin.get();
 
 	return 0;
 }

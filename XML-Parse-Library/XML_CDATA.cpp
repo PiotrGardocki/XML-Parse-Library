@@ -1,8 +1,9 @@
 #include "XML_CDATA.hpp"
+#include "XML_Exception.hpp"
 
 XML_CDATA::XML_CDATA(const std::string & value)
-	: mValue(value)
 {
+	setValue(value);
 }
 
 XML_ElementType XML_CDATA::getElementType() const
@@ -12,7 +13,9 @@ XML_ElementType XML_CDATA::getElementType() const
 
 void XML_CDATA::setValue(const std::string & value)
 {
-	// TO DO: add parser checking
+	if (value.find("]]>") != std::string::npos)
+		throw XML_Exception("XML_CDATA cannot contain substring ']]>'");
+
 	mValue = value;
 }
 

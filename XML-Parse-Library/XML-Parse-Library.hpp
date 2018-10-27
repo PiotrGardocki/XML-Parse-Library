@@ -6,3 +6,4 @@
 #include "XML_Document.hpp"
 #include "XML_Exception.hpp"
 #include "XML_Value.hpp"
+#include "Utilities.hpp"

@@ -1,9 +1,13 @@
 #include <utility>
+#include <cctype>
 #include "XML_Tag.hpp"
+#include "XML_Value.hpp"
+#include "XML_Exception.hpp"
+#include "Utilities.hpp"
 
 XML_Tag::XML_Tag(const std::string & tagName)
-	: mTagName(tagName)
 {
+	setTagName(tagName);
 }
 
 XML_Tag::XML_Tag(const XML_Tag & tag)
@@ -52,7 +56,7 @@ void XML_Tag::appendChild(const XML_BaseElement & element)
 void XML_Tag::appendChild(XML_BaseElement && element)
 {
 	std::unique_ptr<XML_BaseElement> moved = element.makeMovedCopy();
-	appendChild(moved);
+	appendChild(std::move(moved));
 }
 
 void XML_Tag::appendChild(const std::unique_ptr<XML_BaseElement> & element)
@@ -73,21 +77,33 @@ unsigned XML_Tag::getChildrenCount() const
 	return mChildren.size();
 }
 
+XML_BaseElement & XML_Tag::getChildByPosition(unsigned position)
+{
+	if (position < getChildrenCount())
+		return *mChildren.at(position);
+	throw XML_Exception("Attempt to access to child out of range");
+}
+
+const XML_BaseElement & XML_Tag::getChildByPosition(unsigned position) const
+{
+	return getChildByPosition(position);
+}
+
 void XML_Tag::setAttribute(const std::string & attributeName, const std::string & value)
 {
-	mAttributes[attributeName] = value;
+	mAttributes[correctString(attributeName)] = correctString(value);
 }
 
 bool XML_Tag::deleteAttribute(const std::string & attributeName)
 {
-	auto deletedAttributesCount = mAttributes.erase(attributeName);
+	auto deletedAttributesCount = mAttributes.erase(correctString(attributeName));
 
 	return static_cast<bool>(deletedAttributesCount);
 }
 
 std::string XML_Tag::getAttributeValue(const std::string & attributeName) const
 {
-	auto iterator = mAttributes.find(attributeName);
+	auto iterator = mAttributes.find(correctString(attributeName));
 
 	if (iterator == mAttributes.end())
 		return "";
@@ -96,11 +112,30 @@ std::string XML_Tag::getAttributeValue(const std::string & attributeName) const
 
 bool XML_Tag::hasAttribute(const std::string & attributeName) const
 {
-	return (mAttributes.find(attributeName) != mAttributes.end());
+	return (mAttributes.find(correctString(attributeName)) != mAttributes.end());
+}
+
+bool isTagNameCorrect(const std::string & tagName)
+{
+	char firstChar = tagName.at(0);
+
+	if (firstChar == '-' || firstChar == '.' || std::isdigit(firstChar))
+		return false;
+
+	std::string badCharacters("!\"#$%&'()*+,/;<=>?@[\\]^`{|}~");
+
+	for (auto & ch : badCharacters)
+		if (tagName.find(ch) != std::string::npos)
+			return false;
+
+	return true;
 }
 
 void XML_Tag::setTagName(const std::string & tagName)
 {
+	if (tagName.size() > 0 && !isTagNameCorrect(tagName))
+		throw XML_Exception("Tag's name can't contain any of the characters: ' !\"#$%&'()*+,/;<=>?@[\\]^`{|}~ ', space and cannot begin with '-' '.' or a digit");
+
 	mTagName = tagName;
 }
 
@@ -116,7 +151,8 @@ bool XML_Tag::hasTagName() const
 
 void XML_Tag::setValue(const std::string & value)
 {
-	// TO DO: add parser checking
+	mChildren.clear();
+	mChildren.push_back(std::make_unique<XML_Value>(value));
 }
 
 std::string XML_Tag::getValueInOneLine() const

@@ -31,6 +31,16 @@ unsigned XML_BaseElement::getChildrenCount() const
 	return 0;
 }
 
+XML_BaseElement & XML_BaseElement::getChildByPosition(unsigned position)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+const XML_BaseElement & XML_BaseElement::getChildByPosition(unsigned position) const
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
 void XML_BaseElement::setAttribute(const std::string & attributeName, const std::string & value)
 {
 	throw XML_Exception(getClassName() + " class cannot have attributes");
@@ -66,18 +76,18 @@ bool XML_BaseElement::hasTagName() const
 	throw XML_Exception(getClassName() + " class cannot have tag name");
 }
 
-XML_Tag * XML_BaseElement::getParent()
+XML_Tag & XML_BaseElement::getParent()
 {
 	if (hasParent())
-		return mParent;
-	throw XML_Exception("XML Element object has not a parent oobject");
+		return *mParent;
+	throw XML_Exception("XML Element object has not a parent object");
 }
 
-const XML_Tag * XML_BaseElement::getParent() const
+const XML_Tag & XML_BaseElement::getParent() const
 {
 	if (hasParent())
-		return mParent;
-	throw XML_Exception("XML Element object has not a parent oobject");
+		return *mParent;
+	throw XML_Exception("XML Element object has not a parent object");
 }
 
 bool XML_BaseElement::hasParent() const

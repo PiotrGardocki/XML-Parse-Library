@@ -11,7 +11,7 @@ class XML_Tag : public XML_BaseElement
 {
 public:
 	XML_Tag() = default;
-	XML_Tag(const std::string & tagName);
+	explicit XML_Tag(const std::string & tagName);
 
 	XML_Tag(const XML_Tag & tag);
 	XML_Tag(XML_Tag && tag) = default;
@@ -32,6 +32,8 @@ public:
 	//bool removeChild(const XML_Tag * const elementPtr);
 
 	virtual unsigned getChildrenCount() const;
+	virtual XML_BaseElement & getChildByPosition(unsigned position) override;
+	virtual const XML_BaseElement & getChildByPosition(unsigned position) const override;
 
 	virtual void setAttribute(const std::string & attributeName, const std::string & value);
 	virtual bool deleteAttribute(const std::string & attributeName);

@@ -7,7 +7,7 @@
 class XML_Exception : public std::exception
 {
 public:
-	XML_Exception(const std::string & message);
+	explicit XML_Exception(const std::string & message);
 
 	virtual const char * what() const override;
 
