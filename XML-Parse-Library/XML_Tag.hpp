@@ -23,29 +23,47 @@ public:
 
 	virtual XML_ElementType getElementType() const override;
 
-	virtual void appendChild(const XML_BaseElement & element);
-	virtual void appendChild(XML_BaseElement && element);
-	virtual void appendChild(const std::unique_ptr<XML_BaseElement> & element);
-	virtual void appendChild(std::unique_ptr<XML_BaseElement> && element);
+// modifying tree's structure
+
+	virtual void appendChild(const XML_BaseElement & element) override;
+	virtual void appendChild(XML_BaseElement && element) override;
+	virtual void appendChild(const std::unique_ptr<XML_BaseElement> & element) override;
+	virtual void appendChild(std::unique_ptr<XML_BaseElement> && element) override;
 
 	//bool removeChild(const XML_Tag & element);
 	//bool removeChild(const XML_Tag * const elementPtr);
 
-	virtual unsigned getChildrenCount() const;
+// getting access to child elements
+
+	virtual unsigned getChildrenCount() const override;
 	virtual XML_BaseElement & getChildByPosition(unsigned position) override;
 	virtual const XML_BaseElement & getChildByPosition(unsigned position) const override;
 
-	virtual void setAttribute(const std::string & attributeName, const std::string & value);
-	virtual bool deleteAttribute(const std::string & attributeName);
-	virtual std::string getAttributeValue(const std::string & attributeName) const;
-	virtual bool hasAttribute(const std::string & attributeName) const;
+	virtual std::vector<XML_BaseElement *> getAllChildren() override;
+	virtual std::vector<const XML_BaseElement *> getAllChildren() const override;
 
-	virtual void setTagName(const std::string & tagName);
-	virtual std::string getTagName() const;
-	virtual bool hasTagName() const;
+	virtual std::vector<XML_BaseElement *> getChildrenByTagName(const std::string & tagName) override;
+	virtual std::vector<const XML_BaseElement *> getChildrenByTagName(const std::string & tagName) const override;
 
+	virtual std::vector<XML_BaseElement *> getChildrenWithAttribute(const std::string & attributeName) override;
+	virtual std::vector<const XML_BaseElement *> getChildrenWithAttribute(const std::string & attributeName) const override;
 
-	virtual void setValue(const std::string & value);
+	virtual std::vector<XML_BaseElement *> getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue) override;
+	virtual std::vector<const XML_BaseElement *> getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue) const override;
+
+// setting attributes
+
+	virtual void setAttribute(const std::string & attributeName, const std::string & value) override;
+	virtual bool deleteAttribute(const std::string & attributeName) override;
+	virtual std::string getAttributeValue(const std::string & attributeName) const override;
+	virtual bool hasAttribute(const std::string & attributeName) const override;
+	virtual bool hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const override;
+
+	virtual void setTagName(const std::string & tagName) override;
+	virtual std::string getTagName() const override;
+	virtual bool hasTagName() const override;
+
+	virtual void setValue(const std::string & value) override;
 
 	virtual std::string getValueInOneLine() const override;
 	virtual std::list<std::string> getValueInLines() const override;

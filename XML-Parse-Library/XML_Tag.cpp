@@ -89,6 +89,94 @@ const XML_BaseElement & XML_Tag::getChildByPosition(unsigned position) const
 	return getChildByPosition(position);
 }
 
+std::vector<XML_BaseElement*> XML_Tag::getAllChildren()
+{
+	std::vector<XML_BaseElement *> children;
+	children.reserve(mChildren.size());
+
+	for (auto & child : mChildren)
+		children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<const XML_BaseElement*> XML_Tag::getAllChildren() const
+{
+	std::vector<const XML_BaseElement *> children;
+	children.reserve(mChildren.size());
+
+	for (auto & child : mChildren)
+		children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<XML_BaseElement*> XML_Tag::getChildrenByTagName(const std::string & tagName)
+{
+	std::vector<XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->getTagName() == tagName)
+			children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<const XML_BaseElement*> XML_Tag::getChildrenByTagName(const std::string & tagName) const
+{
+	std::vector<const XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->getTagName() == tagName)
+			children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<XML_BaseElement*> XML_Tag::getChildrenWithAttribute(const std::string & attributeName)
+{
+	std::vector<XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->hasAttribute(attributeName))
+			children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<const XML_BaseElement*> XML_Tag::getChildrenWithAttribute(const std::string & attributeName) const
+{
+	std::vector<const XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->hasAttribute(attributeName))
+			children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<XML_BaseElement*> XML_Tag::getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue)
+{
+	std::vector<XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->hasAttributeSetWithValue(attributeName, attributeValue))
+			children.emplace_back(child.get());
+
+	return children;
+}
+
+std::vector<const XML_BaseElement*> XML_Tag::getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue) const
+{
+	std::vector<const XML_BaseElement *> children;
+
+	for (auto & child : mChildren)
+		if (child->getElementType() == XML_ElementType::TAG && child->hasAttributeSetWithValue(attributeName, attributeValue))
+			children.emplace_back(child.get());
+
+	return children;
+}
+
 void XML_Tag::setAttribute(const std::string & attributeName, const std::string & value)
 {
 	mAttributes[correctString(attributeName)] = correctString(value);
@@ -113,6 +201,15 @@ std::string XML_Tag::getAttributeValue(const std::string & attributeName) const
 bool XML_Tag::hasAttribute(const std::string & attributeName) const
 {
 	return (mAttributes.find(correctString(attributeName)) != mAttributes.end());
+}
+
+bool XML_Tag::hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const
+{
+	auto iterator = mAttributes.find(correctString(attributeName));
+
+	if (iterator == mAttributes.end() || iterator->second != correctString(value))
+		return false;
+	return true;
 }
 
 bool isTagNameCorrect(const std::string & tagName)

@@ -41,6 +41,46 @@ const XML_BaseElement & XML_BaseElement::getChildByPosition(unsigned position) c
 	throw XML_Exception(getClassName() + " class cannot have child elements");
 }
 
+std::vector<XML_BaseElement*> XML_BaseElement::getAllChildren()
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<const XML_BaseElement*> XML_BaseElement::getAllChildren() const
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<XML_BaseElement*> XML_BaseElement::getChildrenByTagName(const std::string & tagName)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<const XML_BaseElement*> XML_BaseElement::getChildrenByTagName(const std::string & tagName) const
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<XML_BaseElement*> XML_BaseElement::getChildrenWithAttribute(const std::string & attributeName)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<const XML_BaseElement*> XML_BaseElement::getChildrenWithAttribute(const std::string & attributeName) const
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<XML_BaseElement*> XML_BaseElement::getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::vector<const XML_BaseElement*> XML_BaseElement::getChildrenByAttributeValue(const std::string & attributeName, const std::string & attributeValue) const
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
 void XML_BaseElement::setAttribute(const std::string & attributeName, const std::string & value)
 {
 	throw XML_Exception(getClassName() + " class cannot have attributes");
@@ -53,12 +93,17 @@ bool XML_BaseElement::deleteAttribute(const std::string & attributeName)
 
 std::string XML_BaseElement::getAttributeValue(const std::string & attributeName) const
 {
-	return "";
+	throw XML_Exception(getClassName() + " class cannot have attributes");
 }
 
 bool XML_BaseElement::hasAttribute(const std::string & attributeName) const
 {
-	return false;
+	throw XML_Exception(getClassName() + " class cannot have attributes");
+}
+
+bool XML_BaseElement::hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const
+{
+	throw XML_Exception(getClassName() + " class cannot have attributes");
 }
 
 void XML_BaseElement::setTagName(const std::string & tagName)

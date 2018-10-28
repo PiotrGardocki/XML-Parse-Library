@@ -1,6 +1,7 @@
 #include <iostream>
 #include <exception>
 #include <utility>
+#include <functional>
 #include <memory>
 #include "XML-Parse-Library.hpp"
 
@@ -22,10 +23,17 @@ int main()
 	cout << ptr->hasParent() << endl;
 
 	auto & x = ptr->getParent();
+	XML_BaseElement & y = tag.getChildByPosition(0);
 
-	cout << &x << endl;
+	cout << ptr << endl;
+	cout << &y << endl;*/
 
-	cout << &tag << endl;*/
+	//cout << &tag << endl;
+
+	/*XML_Document doc;
+	doc.getRootElement() = tag;
+
+	doc.saveToFile("test2.xml");*/
 
 	/*std::string str("<&div>");
 
@@ -37,7 +45,7 @@ int main()
 
 	cout << str << endl;*/
 
-	/*XML_Document document;
+	XML_Document document;
 	
 	XML_Tag tag1("head");
 	tag1.appendChild(XML_Tag("title"));
@@ -69,7 +77,21 @@ int main()
 	document.getRootElement().appendChild(std::move(tag2));
 	document.getRootElement().setTagName("html");
 
-	document.saveToFile("test.xml");*/
+	auto & root = document.getRootElement();
+
+	auto vec = root.getChildrenByTagName("html");
+	cout << vec.size() << endl;
+	//cout << vec[0] << endl;
+	//cout << &root.getChildByPosition(1) << endl;
+
+	/*auto vec = root.getAllChildren();
+	cout << vec.size() << " " << root.getChildrenCount() << endl;
+	for (int i = 0; i < root.getChildrenCount(); ++i)
+	{
+		cout << i << ":" << vec.at(i) << " " << &root.getChildByPosition(i) << endl;
+	}*/
+
+	//document.saveToFile("test.xml");
 
 	//cout << tag1.getTagName() << "\n" << tag1.getChildrenCount();
 	cin.get();
