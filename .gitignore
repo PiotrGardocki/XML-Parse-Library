@@ -43,3 +43,5 @@ Release/
 # Other files
 *.txt
 *OLD*
+main.cpp
+*.xml
