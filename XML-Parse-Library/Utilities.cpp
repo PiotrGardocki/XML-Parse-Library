@@ -1,14 +1,27 @@
 #include "Utilities.hpp"
 
-std::string correctString(const std::string & str)
+std::string translateStringIntoXMLStyle(const std::string & str)
 {
 	std::string copy(str);
 	
-	replaceOccurencies(copy, "&", "&amp;");
-	replaceOccurencies(copy, "<", "&lt;");
-	replaceOccurencies(copy, ">", "&gt;");
+	replaceOccurencies(copy, "&" , "&amp;");
+	replaceOccurencies(copy, "<" , "&lt;");
+	replaceOccurencies(copy, ">" , "&gt;");
 	replaceOccurencies(copy, "\"", "&quot;");
-	replaceOccurencies(copy, "'", "&apos;");
+	replaceOccurencies(copy, "'" , "&apos;");
+
+	return copy;
+}
+
+std::string translateStringFromXMLStyle(const std::string & str)
+{
+	std::string copy(str);
+
+	replaceOccurencies(copy, "&apos;", "'");
+	replaceOccurencies(copy, "&quot;", "\"");
+	replaceOccurencies(copy, "&gt;"  , ">");
+	replaceOccurencies(copy, "&lt;"  , "<");
+	replaceOccurencies(copy, "&amp;" , "&");
 
 	return copy;
 }

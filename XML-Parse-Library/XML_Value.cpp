@@ -13,7 +13,7 @@ XML_ElementType XML_Value::getElementType() const
 
 void XML_Value::setValue(const std::string & value)
 {
-	mValue = correctString(value);
+	mValue = translateStringIntoXMLStyle(value);
 }
 
 std::string XML_Value::getValueInOneLine() const

@@ -59,6 +59,8 @@ public:
 	virtual bool hasAttribute(const std::string & attributeName) const override;
 	virtual bool hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const override;
 
+// other methods
+
 	virtual void setTagName(const std::string & tagName) override;
 	virtual std::string getTagName() const override;
 	virtual bool hasTagName() const override;

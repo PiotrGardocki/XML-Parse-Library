@@ -53,6 +53,8 @@ public:
 	virtual bool hasAttribute(const std::string & attributeName) const;
 	virtual bool hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const;
 
+// other methods
+
 	virtual void setTagName(const std::string & tagName);
 	virtual std::string getTagName() const;
 	virtual bool hasTagName() const;

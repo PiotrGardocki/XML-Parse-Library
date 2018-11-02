@@ -209,35 +209,36 @@ std::vector<const XML_BaseElement*> XML_Tag::getChildrenByAttributeValue(const s
 
 void XML_Tag::setAttribute(const std::string & attributeName, const std::string & value)
 {
-	mAttributes[correctString(attributeName)] = correctString(value);
+	mAttributes[translateStringIntoXMLStyle(attributeName)] = translateStringIntoXMLStyle(value);
 }
 
 bool XML_Tag::deleteAttribute(const std::string & attributeName)
 {
-	auto deletedAttributesCount = mAttributes.erase(correctString(attributeName));
+	auto deletedAttributesCount = mAttributes.erase(translateStringIntoXMLStyle(attributeName));
 
 	return static_cast<bool>(deletedAttributesCount);
 }
 
 std::string XML_Tag::getAttributeValue(const std::string & attributeName) const
 {
-	auto iterator = mAttributes.find(correctString(attributeName));
+	auto iterator = mAttributes.find(translateStringIntoXMLStyle(attributeName));
 
 	if (iterator == mAttributes.end())
 		return "";
-	return iterator->second;
+
+	return translateStringFromXMLStyle(iterator->second);
 }
 
 bool XML_Tag::hasAttribute(const std::string & attributeName) const
 {
-	return (mAttributes.find(correctString(attributeName)) != mAttributes.end());
+	return (mAttributes.find(translateStringIntoXMLStyle(attributeName)) != mAttributes.end());
 }
 
 bool XML_Tag::hasAttributeSetWithValue(const std::string & attributeName, const std::string & value) const
 {
-	auto iterator = mAttributes.find(correctString(attributeName));
+	auto iterator = mAttributes.find(translateStringIntoXMLStyle(attributeName));
 
-	if (iterator == mAttributes.end() || iterator->second != correctString(value))
+	if (iterator == mAttributes.end() || iterator->second != translateStringIntoXMLStyle(value))
 		return false;
 	return true;
 }
