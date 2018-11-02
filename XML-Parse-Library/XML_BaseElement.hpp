@@ -24,8 +24,8 @@ public:
 	virtual void appendChild(const std::unique_ptr<XML_BaseElement> & element);
 	virtual void appendChild(std::unique_ptr<XML_BaseElement> && element);
 
-	//bool removeChild(const XML_Tag & element);
-	//bool removeChild(const XML_Tag * const elementPtr);
+	virtual std::unique_ptr<XML_BaseElement> removeChild(const XML_Tag & element);
+	virtual std::unique_ptr<XML_BaseElement> removeChild(const XML_Tag * const elementPtr);
 
 // getting access to child elements
 

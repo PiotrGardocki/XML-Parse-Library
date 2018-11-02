@@ -26,6 +26,16 @@ void XML_BaseElement::appendChild(std::unique_ptr<XML_BaseElement>&& element)
 	throw XML_Exception(getClassName() + " class cannot have child elements");
 }
 
+std::unique_ptr<XML_BaseElement> XML_BaseElement::removeChild(const XML_Tag & element)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
+std::unique_ptr<XML_BaseElement> XML_BaseElement::removeChild(const XML_Tag * const elementPtr)
+{
+	throw XML_Exception(getClassName() + " class cannot have child elements");
+}
+
 unsigned XML_BaseElement::getChildrenCount() const
 {
 	return 0;

@@ -72,6 +72,36 @@ void XML_Tag::appendChild(std::unique_ptr<XML_BaseElement> && element)
 	mChildren.back()->setParent(this);
 }
 
+std::unique_ptr<XML_BaseElement> XML_Tag::removeChild(const XML_Tag & element)
+{
+	for (auto iter = mChildren.begin(); iter != mChildren.end(); ++iter)
+	{
+		if (iter->get() == &element)
+		{
+			std::unique_ptr<XML_BaseElement> foundElement(std::move(*iter));
+			mChildren.erase(iter);
+			return foundElement;
+		}
+	}
+
+	return std::unique_ptr<XML_BaseElement>{};
+}
+
+std::unique_ptr<XML_BaseElement> XML_Tag::removeChild(const XML_Tag * const elementPtr)
+{
+	for (auto iter = mChildren.begin(); iter != mChildren.end(); ++iter)
+	{
+		if (iter->get() == elementPtr)
+		{
+			std::unique_ptr<XML_BaseElement> foundElement(std::move(*iter));
+			mChildren.erase(iter);
+			return foundElement;
+		}
+	}
+
+	return std::unique_ptr<XML_BaseElement>{};
+}
+
 unsigned XML_Tag::getChildrenCount() const
 {
 	return mChildren.size();

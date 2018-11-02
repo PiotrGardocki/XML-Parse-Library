@@ -30,8 +30,8 @@ public:
 	virtual void appendChild(const std::unique_ptr<XML_BaseElement> & element) override;
 	virtual void appendChild(std::unique_ptr<XML_BaseElement> && element) override;
 
-	//bool removeChild(const XML_Tag & element);
-	//bool removeChild(const XML_Tag * const elementPtr);
+	virtual std::unique_ptr<XML_BaseElement> removeChild(const XML_Tag & element) override;
+	virtual std::unique_ptr<XML_BaseElement> removeChild(const XML_Tag * const elementPtr) override;
 
 // getting access to child elements
 
