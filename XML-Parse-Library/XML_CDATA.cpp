@@ -33,7 +33,7 @@ std::list<std::string> XML_CDATA::getValueInLines() const
 
 std::string XML_CDATA::getElementWithValueInOneLine() const
 {
-	return std::string("<![CDATA[ ") + mValue + " ]]>";
+	return std::string("<![CDATA[") + mValue + "]]>";
 }
 
 std::list<std::string> XML_CDATA::getElementWithValueInLines() const

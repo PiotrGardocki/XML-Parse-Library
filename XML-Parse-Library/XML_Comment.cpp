@@ -34,7 +34,7 @@ std::list<std::string> XML_Comment::getValueInLines() const
 
 std::string XML_Comment::getElementWithValueInOneLine() const
 {
-	return std::string("<!-- ") + mValue + " -->";
+	return std::string("<!--") + mValue + "-->";
 }
 
 std::list<std::string> XML_Comment::getElementWithValueInLines() const
